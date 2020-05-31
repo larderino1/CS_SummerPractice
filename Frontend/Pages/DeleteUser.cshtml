@@ -1,0 +1,22 @@
+﻿@page
+@model Frontend.Pages.DeleteUserModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "UserEdit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>UserEdit</h1>
+<div>
+    <form method="get">
+        <label>Are you sure want to delete @Model.UserManager.UserName ?</label>
+    </form>
+</div>
+<div>
+    <form method="post">
+        <input type="submit" asp-page-handler="DeleteUser" value="Delete" class="btn btn-danger" />
+        <a asp-page="./AdminPage">Back to List</a>
+    </form>
+</div>
+
+

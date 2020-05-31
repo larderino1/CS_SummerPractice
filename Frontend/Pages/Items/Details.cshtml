@@ -1,0 +1,49 @@
+﻿@page
+@model Frontend.Pages.ItemPages.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Product Information</h4>
+    <div>
+        <img class="img-thumbnail" src="@Model.ShopItem.Image" height="250" width="150" />
+    </div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ShopItem.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ShopItem.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ShopItem.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ShopItem.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ShopItem.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ShopItem.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ShopItem.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ShopItem.Category.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (Model.ShopItem.UserId.Equals(Model.LoggedUserId))
+    {
+    <a asp-page="./Edit" asp-route-id="@Model.ShopItem.Id">Edit</a>
+    }
+    | <a asp-page="./Items">Back to List</a>
+</div>

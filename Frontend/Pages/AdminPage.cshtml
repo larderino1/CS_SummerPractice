@@ -1,0 +1,40 @@
+﻿@page
+@model Frontend.Pages.AdminPageModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "AdminPage";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>AdminPage</h1>
+<div>
+    <form method="get">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => user.UserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => user.UserRole)
+                        </td>
+                        <td>
+                            <a asp-page="./DeleteUser" asp-route-name="@user.UserName">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        
+    </form>
+</div>
+

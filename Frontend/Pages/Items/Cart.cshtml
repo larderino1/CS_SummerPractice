@@ -1,0 +1,65 @@
+﻿@page
+@model Frontend.Pages.Items.CartModel
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Cart</title>
+</head>
+<body>
+    <h1>Cart</h1>
+    <form method="post" asp-page="./Cart" asp-page-handler="Update">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Name</th>
+                    <th>
+                        Image
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Quantity <input type="submit" value="Update" />
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Cart)
+                {
+                    <tr>
+                        <td>
+                            <a asp-page="./Cart" asp-page-handler="Delete" asp-route-id="@item.ProductItem.Id">Delete</a>
+                        </td>
+                        <td>
+                            @item.ProductItem.Name
+                        </td>
+                        <td>
+                            @item.ProductItem.Image
+                        </td>
+                        <td>
+                            @item.ProductItem.Price
+                        </td>
+                        <td>
+                            <input type="number" name="quantity" value="@item.Quantity" min="1" style="width: 50px;" />
+                        </td>
+                        <td>
+                            $@(item.ProductItem.Price * item.Quantity)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td colspan="6" align="right">Total</td>
+                    <td align="center">$@Model.Total</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <a asp-page="./Items">Continue Shopping</a>
+</body>
