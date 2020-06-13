@@ -20,7 +20,7 @@ namespace Frontend.Services.CategoryService
                     RequestUri = new Uri("https://localhost:44304/api/category")
                 };
                 var json = JsonConvert.SerializeObject(category);
-                await client.PostAsync(request.RequestUri, new StringContent(json, Encoding.UTF8, "application/json"));
+                var response = await client.PostAsync(request.RequestUri, new StringContent(json, Encoding.UTF8, "application/json"));
             }
         }
 
