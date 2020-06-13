@@ -17,7 +17,7 @@ namespace Frontend.Services.ItemService
             {
                 var request = new HttpRequestMessage
                 {
-                    RequestUri = new Uri($"https://localhost:44353/api/product")
+                    RequestUri = new Uri($"https://localhost:44394/api/product")
                 };
                 var json = JsonConvert.SerializeObject(item);
                 await client.PostAsync(request.RequestUri, new StringContent(json, Encoding.UTF8, "application/json"));
@@ -30,7 +30,7 @@ namespace Frontend.Services.ItemService
             {
                 var request = new HttpRequestMessage
                 {
-                    RequestUri = new Uri($"https://localhost:44353/api/product/{id}")
+                    RequestUri = new Uri($"https://localhost:44394/api/product/{id}")
                 };
                 await client.DeleteAsync(request.RequestUri);
             }
@@ -42,7 +42,7 @@ namespace Frontend.Services.ItemService
             {
                 var request = new HttpRequestMessage
                 {
-                    RequestUri = new Uri($"https://localhost:44353/api/product")
+                    RequestUri = new Uri($"https://localhost:44394/api/product")
                 };
                 var response = await client.GetAsync(request.RequestUri);
                 var jsonResult = await response.Content.ReadAsStringAsync();
@@ -57,7 +57,7 @@ namespace Frontend.Services.ItemService
             {
                 var request = new HttpRequestMessage
                 {
-                    RequestUri = new Uri($"https://localhost:44353/api/product/{id}")
+                    RequestUri = new Uri($"https://localhost:44394/api/product/{id}")
                 };
                 var jsonResult = await client.GetAsync(request.RequestUri);
                 var response = await jsonResult.Content.ReadAsStringAsync();
@@ -72,7 +72,7 @@ namespace Frontend.Services.ItemService
             {
                 var request = new HttpRequestMessage
                 {
-                    RequestUri = new Uri($"https://localhost:44353/api/product/{item.Id}")
+                    RequestUri = new Uri($"https://localhost:44394/api/product/{item.Id}")
                 };
                 var json = JsonConvert.SerializeObject(item);
                 await client.PutAsync(request.RequestUri, new StringContent(json, Encoding.UTF8, "application/json"));

@@ -17,10 +17,10 @@ namespace Frontend.Services.CategoryService
             {
                 var request = new HttpRequestMessage
                 {
-                    RequestUri = new Uri("https://localhost:44338/api/category")
+                    RequestUri = new Uri("https://localhost:44304/api/category")
                 };
                 var json = JsonConvert.SerializeObject(category);
-                await client.PostAsync(request.RequestUri, new StringContent(json, Encoding.UTF8, "application/json"));
+                var response = await client.PostAsync(request.RequestUri, new StringContent(json, Encoding.UTF8, "application/json"));
             }
         }
 
@@ -30,7 +30,7 @@ namespace Frontend.Services.CategoryService
             {
                 var request = new HttpRequestMessage
                 {
-                    RequestUri = new Uri($"https://localhost:44338/api/category/{id}")
+                    RequestUri = new Uri($"https://localhost:44304/api/category/{id}")
                 };
                 await client.DeleteAsync(request.RequestUri);
             }
@@ -42,7 +42,7 @@ namespace Frontend.Services.CategoryService
             {
                 var request = new HttpRequestMessage
                 {
-                    RequestUri = new Uri("https://localhost:44338/api/category")
+                    RequestUri = new Uri("https://localhost:44304/api/category")
                 };
                 var response = await client.GetAsync(request.RequestUri);
                 var jsonResult = await response.Content.ReadAsStringAsync();
@@ -57,7 +57,7 @@ namespace Frontend.Services.CategoryService
             {
                 var request = new HttpRequestMessage
                 {
-                    RequestUri = new Uri($"https://localhost:44338/api/category/{id}")
+                    RequestUri = new Uri($"https://localhost:44304/api/category/{id}")
                 };
                 var jsonResult = await client.GetAsync(request.RequestUri);
                 var response = await jsonResult.Content.ReadAsStringAsync();
@@ -72,7 +72,7 @@ namespace Frontend.Services.CategoryService
             {
                 var request = new HttpRequestMessage
                 {
-                    RequestUri = new Uri($"https://localhost:44338/api/category/{category.Id}")
+                    RequestUri = new Uri($"https://localhost:44304/api/category/{category.Id}")
                 };
                 var json = JsonConvert.SerializeObject(category);
                 await client.PutAsync(request.RequestUri, new StringContent(json, Encoding.UTF8, "application/json"));
