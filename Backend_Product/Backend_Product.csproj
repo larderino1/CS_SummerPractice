@@ -5,6 +5,7 @@
     <UserSecretsId>e3a85c02-b127-45cc-b104-872d2712b915</UserSecretsId>
     <AssemblyName>Backend_Product</AssemblyName>
     <RootNamespace>Backend_Product</RootNamespace>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>

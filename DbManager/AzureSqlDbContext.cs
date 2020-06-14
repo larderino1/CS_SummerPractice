@@ -13,6 +13,7 @@ namespace Frontend.Data
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<ShopItem> ShopItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         public AzureSqlDbContext(IConfiguration config)
         {

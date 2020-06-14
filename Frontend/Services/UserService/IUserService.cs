@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Frontend.Services.UserService
 {
-    interface IUserService
+    public interface IUserService
     {
-        public Task<List<IdentityUser>> GetAllUsers();
-        public Task DeleteUser(string userName);
-        public Task UpdateUserRole(string userName, string roleOld, string roleNew);
-        public Task UpdateUserEmail(string userName, string email);
-        public Task<List<RoleEntity>> GetUsersWithRoles();
+        Task<List<IdentityUser>> GetAllUsers();
+        Task DeleteUser(string userName);
+        Task<IdentityUser> GetUserByName(string userName);
+        Task UpdateUserRole(string userName, string roleOld, string roleNew);
+        Task UpdateUserEmail(string userName, string email);
+        Task<List<RoleEntity>> GetUsersWithRoles();
     }
 }

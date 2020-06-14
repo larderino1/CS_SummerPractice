@@ -36,6 +36,10 @@ namespace Frontend
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("SqlDbConnectionString")));
+
+            services.AddDbContext<AzureSqlDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("SqlDbConnectionString")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -121,7 +125,7 @@ namespace Frontend
             var roleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = service.GetRequiredService<UserManager<IdentityUser>>();
 
-            string[] roles = { "Administrator", "Guest" };
+            string[] roles = { "Administrator", "Supplier", "Guest" };
 
             IdentityResult res;
 
@@ -138,6 +142,10 @@ namespace Frontend
             foreach(var user in users)
             {
                 if(await userManager.IsInRoleAsync(user, "Administrator"))
+                {
+                    continue;
+                }
+                if (await userManager.IsInRoleAsync(user, "Supplier"))
                 {
                     continue;
                 }

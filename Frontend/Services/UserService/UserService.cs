@@ -30,6 +30,11 @@ namespace Frontend.Services.UserService
             return await _userManager.Users.ToListAsync();
         }
 
+        public async Task<IdentityUser> GetUserByName(string userName)
+        {
+            return await _userManager.FindByNameAsync(userName);
+        }
+
         public async Task UpdateUserRole(string userName, string roleOld, string roleNew)
         {
             var user = await _userManager.FindByNameAsync(userName);

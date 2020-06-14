@@ -4,14 +4,16 @@ using Frontend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DbManager.Migrations
 {
     [DbContext(typeof(AzureSqlDbContext))]
-    partial class AzureSqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200614195824_AddOrdersEntity")]
+    partial class AddOrdersEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,10 +52,6 @@ namespace DbManager.Migrations
                         .HasColumnName("Item")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SupplierId")
-                        .HasColumnName("SupplierId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
 
@@ -88,15 +86,15 @@ namespace DbManager.Migrations
                         .HasColumnName("Price")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("SupplierId")
-                        .HasColumnName("SupplierId")
+                    b.Property<Guid>("UserId")
+                        .HasColumnName("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Product");
+                    b.ToTable("ShopItem");
                 });
 
             modelBuilder.Entity("DbManager.Models.ShopItem", b =>
