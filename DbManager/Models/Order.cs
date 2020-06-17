@@ -15,6 +15,10 @@ namespace DbManager.Models
         public Guid Id { get; set; }
         [Column("Item")]
         public string ItemName { get; set; }
+        [Column("Quantity")]
+        public int Quantity { get; set; }
+        [Column("Price")]
+        public double Price { get; set; }
         [ForeignKey("AspNetUsers")]
         public string UserId { get; set; }
         [Column("SupplierId")]
@@ -22,7 +26,7 @@ namespace DbManager.Models
 
         public Order() { }
 
-        public Order(string itemName, string userId, string supplierId)
+        public Order(string itemName, double price, int quantity, string userId, string supplierId)
         {
             ItemName = itemName;
             UserId = userId;

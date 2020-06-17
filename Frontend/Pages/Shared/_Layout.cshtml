@@ -38,10 +38,10 @@
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Categories/Categories">Categories</a>
                             </li>
                         }
-                        @if (User.IsInRole("Supplier"))
+                        @if (User.IsInRole("Supplier") || User.IsInRole("Administrator"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="./OrdersPage">Manage Orders</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="./Orders">Manage Orders</a>
                             </li>
                         }
                     </ul>

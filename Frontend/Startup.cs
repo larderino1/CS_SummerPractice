@@ -18,6 +18,7 @@ using Frontend.Services.ItemService;
 using Frontend.Services.CategoryService;
 using Frontend.Services.CartService;
 using Frontend.Services.AzureStorageService;
+using DbManager;
 
 namespace Frontend
 {

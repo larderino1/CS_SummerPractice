@@ -5,7 +5,7 @@ using DbManager.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Frontend.Data
+namespace DbManager
 {
     public class AzureSqlDbContext : DbContext
     {
