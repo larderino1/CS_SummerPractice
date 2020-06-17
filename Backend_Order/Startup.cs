@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Backend_Order.Services;
 using DbManager;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,8 @@ namespace Backend_Order
             services.AddDbContext<AzureSqlDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("SqlDbConnectionString")));
+
+            services.AddScoped<IOrderService, OrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

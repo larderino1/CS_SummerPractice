@@ -36,7 +36,7 @@ namespace Backend_Product.Controllers
         }
 
         // GET: api/Product/{category}
-        [HttpGet("category", Name = "Get")]
+        [HttpGet("{category}", Name = "Get")]
         public async Task<List<ShopItem>> GetByCategory([FromRoute]string category)
         {
             return await _productService.GetProductsByCategory(category);

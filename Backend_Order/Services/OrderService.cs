@@ -29,19 +29,24 @@ namespace Backend_Order.Services
             await context.SaveChangesAsync();
         }
 
-        public Task<List<Order>> GetAllOrders()
+        public async Task<List<Order>> GetAllOrders(string supplierId)
         {
-            throw new NotImplementedException();
+            return await context.Orders.Where(id => id.SupplierId.Equals(supplierId)).ToListAsync();
         }
 
-        public Task<Order> GetOrderById()
+        public async Task<Order> GetOrderById(Guid orderId)
         {
-            throw new NotImplementedException();
+            return await context.Orders.Where(id => id.Id.Equals(orderId)).FirstOrDefaultAsync();
         }
 
-        public Task UpdateOrder()
+        public async Task UpdateOrder(Guid orderId, string itemName, int quantity, double price)
         {
-            throw new NotImplementedException();
+            var order = await context.Orders.Where(id => id.Id.Equals(orderId)).FirstOrDefaultAsync();
+            context.Orders.Update(order);
+            order.ItemName = itemName;
+            order.Quantity = quantity;
+            order.Price = price;
+            await context.SaveChangesAsync();
         }
     }
 }

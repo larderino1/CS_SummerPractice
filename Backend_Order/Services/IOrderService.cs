@@ -12,10 +12,10 @@ namespace Backend_Order.Services
 
         Task DeleteOrder(Guid orderId);
 
-        Task UpdateOrder();
+        Task UpdateOrder(Guid orderId, string itemName, int quantity, double price);
 
-        Task<List<Order>> GetAllOrders();
+        Task<List<Order>> GetAllOrders(string supplierId);
 
-        Task<Order> GetOrderById();
+        Task<Order> GetOrderById(Guid id);
     }
 }
