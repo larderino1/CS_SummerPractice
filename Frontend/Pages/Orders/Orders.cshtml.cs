@@ -14,15 +14,12 @@ namespace Frontend.Pages.Orders
 {
     public class OrdersModel : PageModel
     {
-        private readonly AzureSqlDbContext _context;
-
         private readonly UserManager<IdentityUser> userManager;
 
         private readonly IOrderService orderService;
 
-        public OrdersModel(AzureSqlDbContext context, UserManager<IdentityUser> userManager, IOrderService orderService)
+        public OrdersModel(UserManager<IdentityUser> userManager, IOrderService orderService)
         {
-            _context = context;
             this.userManager = userManager;
             this.orderService = orderService;
         }
@@ -33,7 +30,13 @@ namespace Frontend.Pages.Orders
         public async Task OnGetAsync()
         {
             var user = await userManager.FindByNameAsync(User.Identity.Name);
-            Order = await orderService.GetAllOrders(user.Id);
+            var orders = await orderService.GetAllOrders(user.Id);
+            foreach(var order in orders)
+            {
+                var orderUser = await userManager.FindByIdAsync(order.UserId);
+                order.UserName = orderUser.UserName;
+            }
+            Order = orders;
         }
     }
 }

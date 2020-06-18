@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DbManager;
 using DbManager.Models;
 using Frontend.Services.OrderService;
+using Microsoft.AspNetCore.Identity;
 
 namespace Frontend.Pages.Orders
 {
@@ -17,10 +18,13 @@ namespace Frontend.Pages.Orders
 
         private readonly IOrderService orderService;
 
-        public DeleteModel(AzureSqlDbContext context, IOrderService orderService)
+        private readonly UserManager<IdentityUser> userManager;
+
+        public DeleteModel(AzureSqlDbContext context, UserManager<IdentityUser> userManager, IOrderService orderService)
         {
             _context = context;
             this.orderService = orderService;
+            this.userManager = userManager;
         }
 
         [BindProperty]
@@ -50,6 +54,8 @@ namespace Frontend.Pages.Orders
             }
 
             Order = await orderService.GetOrderById(id);
+            var orderUser = await userManager.FindByIdAsync(Order.UserId);
+            Order.UserName = orderUser.UserName;
 
             if (Order != null)
             {

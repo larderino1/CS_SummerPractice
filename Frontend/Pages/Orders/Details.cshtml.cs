@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using DbManager;
 using DbManager.Models;
 using Frontend.Services.OrderService;
+using Microsoft.AspNetCore.Identity;
 
 namespace Frontend.Pages.Orders
 {
@@ -15,12 +16,15 @@ namespace Frontend.Pages.Orders
     {
         private readonly AzureSqlDbContext _context;
 
+        private readonly UserManager<IdentityUser> userManager;
+
         private readonly IOrderService orderService;
 
-        public DetailsModel(AzureSqlDbContext context, IOrderService orderService)
+        public DetailsModel(AzureSqlDbContext context, UserManager<IdentityUser> userManager, IOrderService orderService)
         {
             _context = context;
             this.orderService = orderService;
+            this.userManager = userManager;
         }
 
         public Order Order { get; set; }
@@ -33,6 +37,8 @@ namespace Frontend.Pages.Orders
             }
 
             Order = await orderService.GetOrderById(id);
+            var orderUser = await userManager.FindByIdAsync(Order.UserId);
+            Order.UserName = orderUser.UserName;
 
             if (Order == null)
             {

@@ -24,6 +24,11 @@ namespace DbManager.Models
         [Column("SupplierId")]
         public string SupplierId { get; set; }
 
+        [NotMapped]
+        public string UserName { get; set; }
+        [NotMapped]
+        public string SupplierName { get; set; }
+
         public Order() { }
 
         public Order(string itemName, double price, int quantity, string userId, string supplierId)
