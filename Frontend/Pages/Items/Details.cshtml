@@ -41,7 +41,7 @@
     </dl>
 </div>
 <div>
-    @if (Model.ShopItem.UserId.Equals(Model.LoggedUserId))
+    @if (Model.ShopItem.SupplierId.Equals(Model.LoggedUserId))
     {
     <a asp-page="./Edit" asp-route-id="@Model.ShopItem.Id">Edit</a>
     }

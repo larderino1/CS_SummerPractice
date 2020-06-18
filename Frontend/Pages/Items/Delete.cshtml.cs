@@ -2,14 +2,9 @@
 using Azure.Storage.Blobs;
 using Frontend.Services.ItemService;
 using DbManager.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Frontend.Pages.ItemPages

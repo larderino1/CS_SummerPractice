@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Configuration;
-using System.Net.Http;
-using Newtonsoft.Json;
 using DbManager.Models;
 using Frontend.Services.CategoryService;
 using Microsoft.AspNetCore.Authorization;

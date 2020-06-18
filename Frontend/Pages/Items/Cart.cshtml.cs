@@ -6,7 +6,6 @@ using Frontend.Data.Models;
 using Frontend.Services.CartService;
 using Frontend.Services.ItemService;
 using Frontend.Services.SessionService;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
