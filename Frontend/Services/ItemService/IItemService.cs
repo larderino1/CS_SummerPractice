@@ -8,14 +8,14 @@ namespace Frontend.Services.ItemService
 {
     public interface IItemService
     {
-        public Task<List<ShopItem>> GetAllItems();
+        Task<List<ShopItem>> GetAllItems();
 
-        public Task<ShopItem> GetItemById(Guid? id);
+        Task<ShopItem> GetItemById(Guid? id);
 
-        public Task UpdateItem(ShopItem item);
+        Task UpdateItem(ShopItem item);
 
-        public Task DeleteItemById(Guid? id);
+        Task DeleteItemById(Guid? id);
 
-        public Task CreateItem(ShopItem item);
+        Task CreateItem(ShopItem item);
     }
 }

@@ -9,16 +9,16 @@ namespace Backend_Product.Services.ProductsService
 {
     interface IProductService
     {
-        public Task<List<ShopItem>> GetAll();
+        Task<List<ShopItem>> GetAll();
 
-        public Task<ShopItem> GetById(Guid id);
+        Task<ShopItem> GetById(Guid id);
 
-        public Task<List<ShopItem>> GetProductsByCategory(string category);
+        Task<List<ShopItem>> GetProductsByCategory(string category);
 
-        public Task CreateProduct(string name, string description, double price, string image, Guid categoryId, Guid userId);
+        Task CreateProduct(string name, string description, double price, string image, Guid categoryId, Guid userId);
 
-        public Task UpdateProduct(Guid id, string name, string description, double price, string image, Guid categoryId);
+        Task UpdateProduct(Guid id, string name, string description, double price, string image, Guid categoryId);
 
-        public Task DeleteProduct(Guid id);
+        Task DeleteProduct(Guid id);
     }
 }

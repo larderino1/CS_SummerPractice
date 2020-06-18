@@ -9,6 +9,6 @@ namespace Frontend.Services.AzureStorageService
 {
     public interface IAzureBlobStorage
     {
-        public Task<string> UploadFileToBlob(IFormFile file);
+        Task<string> UploadFileToBlob(IFormFile file);
     }
 }

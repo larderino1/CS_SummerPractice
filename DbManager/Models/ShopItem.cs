@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace DbManager.Models
 {
-    [Table("ShopItem")]
+    [Table("Product")]
     public class ShopItem
     {
         [Key]
@@ -20,8 +20,8 @@ namespace DbManager.Models
         public double Price { get; set; }
         [Column("Image")]
         public string Image { get; set; }
-        [Column("UserId")]
-        public Guid UserId { get; set; }
+        [Column("SupplierId")]
+        public Guid SupplierId { get; set; }
         [ForeignKey("Category")]
         public Guid CategoryId { get; set; }
         [NotMapped]
@@ -37,7 +37,7 @@ namespace DbManager.Models
             CategoryId = categoryId;
         }
 
-        public ShopItem(string name, string description, double price, string image, Guid categoryId, Guid userId)
+        public ShopItem(string name, string description, double price, string image, Guid categoryId, Guid supplierId)
         {
             Id = Guid.NewGuid();
             Name = name;
@@ -45,7 +45,7 @@ namespace DbManager.Models
             Price = price;
             Image = image;
             CategoryId = categoryId;
-            UserId = userId;
+            SupplierId = supplierId;
         }
 
         public ShopItem() { }

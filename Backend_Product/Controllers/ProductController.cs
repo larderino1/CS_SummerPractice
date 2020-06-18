@@ -46,7 +46,7 @@ namespace Backend_Product.Controllers
         [HttpPost]
         public async Task Post([FromBody] ShopItem product)
         {
-            await _productService.CreateProduct(product.Name, product.Description, product.Price, product.Image, product.CategoryId, product.UserId);
+            await _productService.CreateProduct(product.Name, product.Description, product.Price, product.Image, product.CategoryId, product.SupplierId);
         }
 
         //use only by supplier
