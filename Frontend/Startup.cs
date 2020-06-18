@@ -19,6 +19,7 @@ using Frontend.Services.CategoryService;
 using Frontend.Services.CartService;
 using Frontend.Services.AzureStorageService;
 using DbManager;
+using Frontend.Services.OrderService;
 
 namespace Frontend
 {
@@ -50,6 +51,7 @@ namespace Frontend
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICartService, CartService>();
             services.AddScoped<IAzureBlobStorage, AzureStorageService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             services.AddSession();
 
