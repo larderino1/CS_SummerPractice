@@ -22,15 +22,15 @@ namespace Backend_Order.Controllers
         }
 
         // GET: api/Order
-        [HttpGet("{supplierId}")]
-        public async Task<List<Order>> Get(string supplierId)
+        [HttpGet("supplier/{supplierId}")]
+        public async Task<List<Order>> GetAll(string supplierId)
         {
             return await orderService.GetAllOrders(supplierId);
         }
 
         // GET: api/Order/5
         [HttpGet("{id}", Name = "Get")]
-        public async Task<Order> Get(Guid id)
+        public async Task<Order> GetById(Guid id)
         {
             return await orderService.GetOrderById(id);
         }

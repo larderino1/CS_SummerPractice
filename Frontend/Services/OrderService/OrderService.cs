@@ -42,7 +42,7 @@ namespace Frontend.Services.OrderService
             {
                 var request = new HttpRequestMessage()
                 {
-                    RequestUri = new Uri($"https://localhost:44329/api/order/{id}")
+                    RequestUri = new Uri($"https://localhost:44329/api/order/supplier/{id}")
                 };
                 var response = await client.GetAsync(request.RequestUri);
                 var jsonResult = await response.Content.ReadAsStringAsync();

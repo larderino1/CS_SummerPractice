@@ -118,7 +118,7 @@ namespace Frontend.Pages.Items
             }
 
             Cart.Clear();
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Pages/Index");
         }
     }
 }

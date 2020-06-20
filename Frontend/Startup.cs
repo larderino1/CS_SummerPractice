@@ -144,11 +144,7 @@ namespace Frontend
             var users = await userManager.Users.ToListAsync();
             foreach(var user in users)
             {
-                if(await userManager.IsInRoleAsync(user, "Administrator"))
-                {
-                    continue;
-                }
-                if (await userManager.IsInRoleAsync(user, "Supplier"))
+                if(await userManager.IsInRoleAsync(user, "Administrator") || await userManager.IsInRoleAsync(user, "Supplier"))
                 {
                     continue;
                 }

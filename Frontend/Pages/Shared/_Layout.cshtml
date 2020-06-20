@@ -32,13 +32,13 @@
                             </li>
                         }
 
-                        @if (User.IsInRole("Administrator") || User.IsInRole("Supplier"))
+                        @if (User.IsInRole("Administrator"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Categories/Categories">Categories</a>
                             </li>
                         }
-                        @if (User.IsInRole("Supplier") || User.IsInRole("Administrator"))
+                        @if (User.IsInRole("Supplier"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Orders/Orders">Manage Orders</a>
