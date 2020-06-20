@@ -13,15 +13,19 @@ namespace DbManager.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         [Column("Name")]
+        [DataType(DataType.Text)]
         public string Name { get; set; }
         [Column("Description")]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+        [Required]
+        [DataType(DataType.Currency)]
         [Column("Price")]
         public double Price { get; set; }
         [Column("Image")]
         public string Image { get; set; }
         [Column("SupplierId")]
-        public Guid SupplierId { get; set; }
+        public string SupplierId { get; set; }
         [ForeignKey("Category")]
         public Guid CategoryId { get; set; }
         [NotMapped]
@@ -37,7 +41,7 @@ namespace DbManager.Models
             CategoryId = categoryId;
         }
 
-        public ShopItem(string name, string description, double price, string image, Guid categoryId, Guid supplierId)
+        public ShopItem(string name, string description, double price, string image, Guid categoryId, string supplierId)
         {
             Id = Guid.NewGuid();
             Name = name;

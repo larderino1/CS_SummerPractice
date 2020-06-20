@@ -5,12 +5,12 @@
 }
 
 <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>Cart</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cart</title>
 </head>
 <body>
     <h1>Cart</h1>
-    <form method="post" asp-page="./Cart" asp-page-handler="Update">
+    <form method="post" asp-page="./Cart" asp-page-handler="Checkout">
         <table class="table">
             <thead>
                 <tr>
@@ -23,7 +23,7 @@
                         Price
                     </th>
                     <th>
-                        Quantity <input type="submit" value="Update" />
+                        Quantity
                     </th>
                     <th>
                         Total
@@ -31,33 +31,34 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Cart)
-                {
-                    <tr>
-                        <td>
-                            <a asp-page="./Cart" asp-page-handler="Delete" asp-route-id="@item.ProductItem.Id">Delete</a>
-                        </td>
-                        <td>
-                            @item.ProductItem.Name
-                        </td>
-                        <td>
-                            @item.ProductItem.Image
-                        </td>
-                        <td>
-                            @item.ProductItem.Price
-                        </td>
-                        <td>
-                            <input type="number" name="quantity" value="@item.Quantity" min="1" style="width: 50px;" />
-                        </td>
-                        <td>
-                            $@(item.ProductItem.Price * item.Quantity)
-                        </td>
-                    </tr>
-                }
+            @foreach (var item in Model.Cart)
+            {
                 <tr>
-                    <td colspan="6" align="right">Total</td>
-                    <td align="center">$@Model.Total</td>
+                    <td>
+                        <a asp-page="./Cart" asp-page-handler="Delete" asp-route-id="@item.ProductItem.Id">Delete</a>
+                    </td>
+                    <td>
+                        @item.ProductItem.Name
+                    </td>
+                    <td>
+                        <img class="img-thumbnail" src="@item.ProductItem.Image" width="100" height="100"/>
+                    </td>
+                    <td>
+                        @item.ProductItem.Price₴
+                    </td>
+                    <td>
+                        <input type="number" name="quantity" id="quantity" value="@item.Quantity" min="1" style="width: 50px;" onkeyup='saveValue(this);'/>
+                    </td>
+                    <td>
+                        @(item.ProductItem.Price * item.Quantity)₴
+                    </td>
                 </tr>
+            }
+            <tr>
+                <td colspan="4" align="right">Total</td>
+                <td align="left">$@Model.Total₴</td>
+                <td align="left"><input type="submit" class="btn btn-custom" value="Checkout"/></td>
+            </tr>
             </tbody>
         </table>
     </form>

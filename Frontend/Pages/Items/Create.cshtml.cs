@@ -57,7 +57,7 @@ namespace Frontend.Pages.ItemPages
             }
 
             ShopItem.Image = await azureService.UploadFileToBlob(FileManager.FormFile);
-            ShopItem.SupplierId = new Guid(_userManager.GetUserId(User));
+            ShopItem.SupplierId = _userManager.GetUserId(User);
 
             await itemService.CreateItem(ShopItem);
 
