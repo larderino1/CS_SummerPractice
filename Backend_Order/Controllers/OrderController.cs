@@ -35,6 +35,13 @@ namespace Backend_Order.Controllers
             return await orderService.GetOrderById(id);
         }
 
+        //POST: api/order
+        [HttpPost]
+        public async Task Post([FromBody]Order order)
+        {
+            await orderService.CreateOrder(order);
+        }
+
         // PUT: api/Order/5
         [HttpPut("{id}")]
         public async Task Put(Guid id, [FromBody] Order order)

@@ -17,6 +17,12 @@ namespace Backend_Order.Services
             this.context = context;
         }
 
+        public async Task CreateOrder(Order order)
+        {
+            context.Orders.Add(order);
+            await context.SaveChangesAsync();
+        }
+
         public async Task DeleteOrder(Guid orderId)
         {
             var order = await context.Orders.FirstOrDefaultAsync(id => id.Id.Equals(orderId));

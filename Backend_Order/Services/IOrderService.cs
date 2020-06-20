@@ -8,6 +8,7 @@ namespace Backend_Order.Services
 {
     public interface IOrderService
     {
+        Task CreateOrder(Order order);
 
         Task DeleteOrder(Guid orderId);
 

@@ -21,7 +21,7 @@ namespace DbManager.Models
         [Column("Image")]
         public string Image { get; set; }
         [Column("SupplierId")]
-        public Guid SupplierId { get; set; }
+        public string SupplierId { get; set; }
         [ForeignKey("Category")]
         public Guid CategoryId { get; set; }
         [NotMapped]
@@ -37,7 +37,7 @@ namespace DbManager.Models
             CategoryId = categoryId;
         }
 
-        public ShopItem(string name, string description, double price, string image, Guid categoryId, Guid userId)
+        public ShopItem(string name, string description, double price, string image, Guid categoryId, string userId)
         {
             Id = Guid.NewGuid();
             Name = name;

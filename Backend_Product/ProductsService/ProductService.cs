@@ -50,7 +50,7 @@ namespace Backend_Product.Services.ProductsService
             return items;
         }
 
-        public async Task CreateProduct(string name, string description, double price, string image, Guid categoryId, Guid userId)
+        public async Task CreateProduct(string name, string description, double price, string image, Guid categoryId, string userId)
         {
             using(var db = new AzureSqlDbContext(config))
             {

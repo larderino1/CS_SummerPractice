@@ -11,6 +11,19 @@ namespace Frontend.Services.OrderService
 {
     public class OrderService : IOrderService
     {
+        public async Task CreateOrder(Order order)
+        {
+            using (var client = new HttpClient())
+            {
+                var request = new HttpRequestMessage()
+                {
+                    RequestUri = new Uri($"https://localhost:44329/api/order")
+                };
+                var orderJson = JsonConvert.SerializeObject(order);
+                await client.PostAsync(request.RequestUri, new StringContent(orderJson, Encoding.UTF8, "application/json"));
+            }
+        }
+
         public async Task DeleteOrderById(Guid? id)
         {
             using (var client = new HttpClient())

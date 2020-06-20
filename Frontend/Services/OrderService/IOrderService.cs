@@ -12,6 +12,8 @@ namespace Frontend.Services.OrderService
 
         Task<Order> GetOrderById(Guid? id);
 
+        Task CreateOrder(Order order);
+
         Task UpdateOrder(Order order);
 
         Task DeleteOrderById(Guid? id);

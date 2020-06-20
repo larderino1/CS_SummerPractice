@@ -4,14 +4,16 @@ using DbManager;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DbManager.Migrations
 {
     [DbContext(typeof(AzureSqlDbContext))]
-    partial class AzureSqlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200620144849_UpdateFieldInProductEntity")]
+    partial class UpdateFieldInProductEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -34,6 +34,8 @@ namespace DbManager.Models
         public Order(string itemName, double price, int quantity, string userId, string supplierId)
         {
             ItemName = itemName;
+            Price = price;
+            Quantity = quantity;
             UserId = userId;
             SupplierId = supplierId;
         }
