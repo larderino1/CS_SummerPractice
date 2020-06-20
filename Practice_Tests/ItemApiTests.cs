@@ -52,7 +52,7 @@ namespace Practice_Tests
                 Price = 1,
                 Image = "C:/Users/oksan/Pictures/2014-04/IMG_8082.JPG",
                 CategoryId = new Guid("6dff5cc6-056f-46d0-a6b1-25471651cf2f"),
-                UserId = new Guid("d802685e-4a5e-465b-8df6-886b266cfe18")
+                SupplierId = "d802685e-4a5e-465b-8df6-886b266cfe18"
             };
 
             await itemService.CreateItem(item);

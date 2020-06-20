@@ -1,0 +1,50 @@
+﻿@page
+@model Frontend.Pages.Orders.OrdersModel
+
+@{
+    ViewData["Title"] = "Orders";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Orders for supplier @Model.User.Identity.Name</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].ItemName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].UserName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Order) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

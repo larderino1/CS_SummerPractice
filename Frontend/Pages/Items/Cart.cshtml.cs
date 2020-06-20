@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DbManager.Models;
 using Frontend.Data.Models;
 using Frontend.Services.CartService;
 using Frontend.Services.ItemService;
+using Frontend.Services.OrderService;
 using Frontend.Services.SessionService;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -22,10 +25,16 @@ namespace Frontend.Pages.Items
 
         private readonly ICartService cartService;
 
-        public CartModel(IItemService service, ICartService cartService)
+        private readonly IOrderService orderService;
+
+        private readonly UserManager<IdentityUser> manager;
+
+        public CartModel(IItemService service, ICartService cartService, IOrderService orderService, UserManager<IdentityUser> manager)
         {
             this.service = service;
             this.cartService = cartService;
+            this.orderService = orderService;
+            this.manager = manager;
         }
 
         public void OnGet()
@@ -86,6 +95,30 @@ namespace Frontend.Pages.Items
             }
             SessionHelper.SetObjectAsJson(HttpContext.Session, "Cart", Cart);
             return RedirectToPage("./Cart");
+        }
+
+        public async Task<IActionResult> OnPostBuy()
+        {
+            Cart = SessionHelper.GetObjectFromJson<List<Product>>(HttpContext.Session, "Cart");
+
+            var user = await manager.FindByNameAsync(User.Identity.Name);
+
+            foreach(var cart in Cart)
+            {
+                var order = new Order
+                {
+                    ItemName = cart.ProductItem.Name,
+                    Quantity = cart.Quantity,
+                    Price = cart.ProductItem.Price * cart.Quantity,
+                    UserId = user.Id,
+                    SupplierId = cart.ProductItem.SupplierId
+                };
+
+                await orderService.CreateOrder(order);
+            }
+
+            Cart.Clear();
+            return RedirectToPage("./Pages/Index");
         }
     }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,6 +9,8 @@
     <Compile Remove="Migrations\20200420133806_AddNullableTypes.Designer.cs" />
     <Compile Remove="Migrations\20200507215111_changeShopItemEntity.cs" />
     <Compile Remove="Migrations\20200507215111_changeShopItemEntity.Designer.cs" />
+    <Compile Remove="Migrations\20200614194222_AddOrdersEntity.cs" />
+    <Compile Remove="Migrations\20200614194222_AddOrdersEntity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

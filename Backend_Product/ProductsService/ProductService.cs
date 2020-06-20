@@ -1,6 +1,4 @@
-﻿
-using Frontend.Data;
-using DbManager.Models;
+﻿using DbManager.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
@@ -9,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using DbManager;
 
 namespace Backend_Product.Services.ProductsService
 {
@@ -51,7 +50,7 @@ namespace Backend_Product.Services.ProductsService
             return items;
         }
 
-        public async Task CreateProduct(string name, string description, double price, string image, Guid categoryId, Guid userId)
+        public async Task CreateProduct(string name, string description, double price, string image, Guid categoryId, string userId)
         {
             using(var db = new AzureSqlDbContext(config))
             {

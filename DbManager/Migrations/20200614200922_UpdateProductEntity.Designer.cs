@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbManager.Migrations
 {
     [DbContext(typeof(AzureSqlDbContext))]
-    [Migration("20200507221624_FixMigrationAddUserBinding")]
-    partial class FixMigrationAddUserBinding
+    [Migration("20200614200922_UpdateProductEntity")]
+    partial class UpdateProductEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,29 @@ namespace DbManager.Migrations
                     b.ToTable("Category");
                 });
 
+            modelBuilder.Entity("DbManager.Models.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ItemName")
+                        .HasColumnName("Item")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SupplierId")
+                        .HasColumnName("SupplierId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("DbManager.Models.ShopItem", b =>
                 {
                     b.Property<Guid>("Id")
@@ -66,15 +89,15 @@ namespace DbManager.Migrations
                         .HasColumnName("Price")
                         .HasColumnType("float");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnName("UserId")
+                    b.Property<Guid>("SupplierId")
+                        .HasColumnName("SupplierId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("ShopItem");
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("DbManager.Models.ShopItem", b =>

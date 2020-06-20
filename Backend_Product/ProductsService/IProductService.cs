@@ -15,7 +15,7 @@ namespace Backend_Product.Services.ProductsService
 
         public Task<List<ShopItem>> GetProductsByCategory(string category);
 
-        public Task CreateProduct(string name, string description, double price, string image, Guid categoryId, Guid userId);
+        public Task CreateProduct(string name, string description, double price, string image, Guid categoryId, string userId);
 
         public Task UpdateProduct(Guid id, string name, string description, double price, string image, Guid categoryId);
 

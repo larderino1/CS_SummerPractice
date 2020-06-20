@@ -18,6 +18,8 @@ using Frontend.Services.ItemService;
 using Frontend.Services.CategoryService;
 using Frontend.Services.CartService;
 using Frontend.Services.AzureStorageService;
+using DbManager;
+using Frontend.Services.OrderService;
 
 namespace Frontend
 {
@@ -36,6 +38,10 @@ namespace Frontend
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("SqlDbConnectionString")));
+
+            services.AddDbContext<AzureSqlDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("SqlDbConnectionString")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -45,6 +51,7 @@ namespace Frontend
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<ICartService, CartService>();
             services.AddScoped<IAzureBlobStorage, AzureStorageService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             services.AddSession();
 
@@ -121,7 +128,7 @@ namespace Frontend
             var roleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = service.GetRequiredService<UserManager<IdentityUser>>();
 
-            string[] roles = { "Administrator", "Guest" };
+            string[] roles = { "Administrator", "Supplier", "Guest" };
 
             IdentityResult res;
 
@@ -137,7 +144,7 @@ namespace Frontend
             var users = await userManager.Users.ToListAsync();
             foreach(var user in users)
             {
-                if(await userManager.IsInRoleAsync(user, "Administrator"))
+                if(await userManager.IsInRoleAsync(user, "Administrator") || await userManager.IsInRoleAsync(user, "Supplier"))
                 {
                     continue;
                 }

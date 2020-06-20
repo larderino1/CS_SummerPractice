@@ -24,20 +24,20 @@ namespace Backend_Product.Controllers
 
         // GET: api/Product
         [HttpGet]
-        public async Task<List<ShopItem>> Get()
+        public async Task<List<ShopItem>> GetAll()
         {
             return await _productService.GetAll();
         }
 
         [HttpGet("{id}")]
-        public async Task<ShopItem> Get(Guid id)
+        public async Task<ShopItem> GetById(Guid id)
         {
             return await _productService.GetById(id);
         }
 
         // GET: api/Product/{category}
-        [HttpGet("category", Name = "Get")]
-        public async Task<List<ShopItem>> GetByCategory([FromRoute]string category)
+        [HttpGet("category/{category}", Name = "Get")]
+        public async Task<List<ShopItem>> GetByCategory(string category)
         {
             return await _productService.GetProductsByCategory(category);
         }
@@ -46,7 +46,7 @@ namespace Backend_Product.Controllers
         [HttpPost]
         public async Task Post([FromBody] ShopItem product)
         {
-            await _productService.CreateProduct(product.Name, product.Description, product.Price, product.Image, product.CategoryId, product.UserId);
+            await _productService.CreateProduct(product.Name, product.Description, product.Price, product.Image, product.CategoryId, product.SupplierId);
         }
 
         //use only by supplier
