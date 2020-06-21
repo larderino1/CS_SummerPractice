@@ -1,6 +1,6 @@
 ﻿@page
 @model Frontend.Pages.ItemPages.EditModel
-
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Pages/Shared/_Layout.cshtml";
@@ -31,7 +31,7 @@
                 <span asp-validation-for="ShopItem.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ShopItem.Image" class="control-label"></label>
+                <img class="img-thumbnail" src="@Model.ShopItem.Image" width="100" height="100" />
                 <input asp-for="FileManager.FormFile" type="file">
                 <span asp-validation-for="FileManager.FormFile"></span>
             </div>
