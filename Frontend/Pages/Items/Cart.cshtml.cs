@@ -120,20 +120,21 @@ namespace Frontend.Pages.Items
 
                 var sb = new StringBuilder();
                 await orderService.CreateOrder(order);
-                sb.AppendLine("<p>Hello!</p>");
-                sb.AppendLine("<p>Thank you for choosing us.</p>");
-                sb.AppendLine($"<p>Your order №{order.Id}:</p>");
-                sb.AppendLine($"<p>{order.ItemName} - {cart.ProductItem.Price}₴");
-                sb.AppendLine($"QTY: {order.Quantity}</p>");
+                sb.AppendLine("<p>Hello!<br>");
+                sb.AppendLine("Thank you for choosing us.</p>");
+                sb.AppendLine("<p>Your order:</p>");
+                sb.AppendLine($"<p>{order.ItemName} - {cart.ProductItem.Price}₴<br>");
+                sb.AppendLine($"QTY: {order.Quantity}₴</p>");
                 sb.AppendLine($"<p>Total: {order.Price}</p>");
-                sb.AppendLine("<p>Best Regards, your HeyTech team</p>");
+                sb.AppendLine("<p>Best regards, your HeyTech team!</p>");
                 var body = sb.ToString();
                 const string subject = "Thank You For Your Purchase";
                 await emailSender.SendEmailAsync(user.Email, subject, body);
 
             }
             Cart.Clear();
-            return RedirectToPage("./Pages/Index");
+            SessionHelper.SetObjectAsJson(HttpContext.Session,"Cart", Cart);
+            return RedirectToPage("./Items");
         }
     }
 }
