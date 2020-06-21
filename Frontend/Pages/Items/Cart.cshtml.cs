@@ -101,34 +101,6 @@ namespace Frontend.Pages.Items
             return RedirectToPage("./Cart");
         }
 
-        public IActionResult OnPostCheckout(int[] quantity)
-        {
-            Cart = SessionHelper.GetObjectFromJson<List<Product>>(HttpContext.Session, "Cart");
-            for (var i = 0; i < Cart.Count; i++)
-            {
-                Cart[i].Quantity = quantity[i];
-            }
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "Cart", Cart);
-            var subject = "Thank You For Your Purchase";
-            var email = User.Identity.Name;
-            var sb = new StringBuilder();
-            double total = 0;
-            sb.AppendLine("<p>Hello!</p>");
-            sb.AppendLine("<p>Thank you for choosing us.</p>");
-            sb.AppendLine("<p>Your order:</p>");
-            sb.AppendLine("<ul>");
-            foreach (var item in Cart)
-            {
-                sb.AppendLine($"<li>{item.ProductItem.Name},{item.ProductItem.Price}₴, {item.Quantity} item(s)</li>");
-                total += item.ProductItem.Price * item.Quantity;
-            }
-            sb.AppendLine("</ul>");
-            sb.AppendLine($"<p>Total: {total}</p>");
-            sb.AppendLine("<p>Best Regards, your HeyTech team</p>");
-            var body = sb.ToString();
-            emailSender.SendEmailAsync(email, subject, body);
-            return RedirectToPage("./Cart");
-        }
         public async Task<IActionResult> OnPostBuy()
         {
             Cart = SessionHelper.GetObjectFromJson<List<Product>>(HttpContext.Session, "Cart");
@@ -146,9 +118,20 @@ namespace Frontend.Pages.Items
                     SupplierId = cart.ProductItem.SupplierId
                 };
 
+                var sb = new StringBuilder();
                 await orderService.CreateOrder(order);
-            }
+                sb.AppendLine("<p>Hello!</p>");
+                sb.AppendLine("<p>Thank you for choosing us.</p>");
+                sb.AppendLine($"<p>Your order №{order.Id}:</p>");
+                sb.AppendLine($"<p>{order.ItemName} - {cart.ProductItem.Price}₴");
+                sb.AppendLine($"QTY: {order.Quantity}</p>");
+                sb.AppendLine($"<p>Total: {order.Price}</p>");
+                sb.AppendLine("<p>Best Regards, your HeyTech team</p>");
+                var body = sb.ToString();
+                const string subject = "Thank You For Your Purchase";
+                await emailSender.SendEmailAsync(user.Email, subject, body);
 
+            }
             Cart.Clear();
             return RedirectToPage("./Pages/Index");
         }

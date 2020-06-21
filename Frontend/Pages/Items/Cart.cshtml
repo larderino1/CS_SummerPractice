@@ -55,14 +55,16 @@
                     </tr>
                 }
                 <tr>
-                    <td colspan="4" align="right">Total</td>
-                    <td align="left">$@Model.Total₴</td>
-                    <td align="left"><input type="submit" class="btn btn-custom" value="Confirm order" asp-page-handler="Buy" /></td>
+                    <td colspan="5" align="right">Total</td>
+                    <td align="center">$@Model.Total₴</td>
                 </tr>
             </tbody>
         </table>
+        <div>
+            <input type="submit" class="btn btn-custom m-0" value="Confirm order" asp-page-handler="Buy" />
+        </div>
     </form>
-    <div>
+    <div class="mt-3">
         <a asp-page="./Items">Continue Shopping</a>
     </div>
 </body>
