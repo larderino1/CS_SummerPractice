@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using DbManager.Models;
 using Frontend.Services.CategoryService;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace Frontend.Pages.Categories
 {
@@ -27,7 +28,7 @@ namespace Frontend.Pages.Categories
             Category = await service.GetAllCategories();
             if (!string.IsNullOrEmpty(SearchString))
             {
-                Category = Category.Where(s => s.Name.Contains(SearchString) || s.Description.Contains(SearchString)).ToList();
+                Category = await Category.Where(s => s.Name.Contains(SearchString) || s.Description.Contains(SearchString)).AsQueryable().ToListAsync();
             }
         }
     }

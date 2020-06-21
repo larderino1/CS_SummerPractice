@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Frontend.Pages.ItemPages
 {
@@ -43,11 +44,11 @@ namespace Frontend.Pages.ItemPages
             }
             if (!string.IsNullOrEmpty(CategoryId))
             {
-                ShopItem = ShopItem.Where(s => s.CategoryId.ToString() == CategoryId).ToList();
+                ShopItem = await ShopItem.Where(s => s.CategoryId.ToString() == CategoryId).AsQueryable().ToListAsync();
             }
             if (!string.IsNullOrEmpty(SearchString))
             {
-                ShopItem = ShopItem.Where(s => s.Name.Contains(SearchString) || s.Description.Contains(SearchString) || s.Category.Name.Contains(SearchString)).ToList();
+                ShopItem = await ShopItem.Where(s => s.Name.Contains(SearchString) || s.Description.Contains(SearchString) || s.Category.Name.Contains(SearchString)).AsQueryable().ToListAsync();
             }
             LoggedUserId = new Guid(_userManager.GetUserId(User));
         }
