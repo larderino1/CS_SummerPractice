@@ -24,21 +24,27 @@ namespace Practice_Tests
         [TestMethod]
         public async Task GetCategoryById()
         {
-            var categoryId = new Guid("944ec12e-b5dd-48f2-b898-90a82be1c638");
-            var category = await categoryService.GetCategoryById(categoryId);
-            Assert.IsTrue(category.Name.Equals("computers"));
+            var category = await categoryService.GetCategoryById(new Guid("944ec12e-b5dd-48f2-b898-90a82be1c638"));
+            Assert.IsNotNull(category);
         }
 
         [TestMethod]
         public async Task DeleteCategory()
         {
-            var categoryId = new Guid("e31e20b8-de4e-4099-b74d-0927c946872c");
-            var category = await categoryService.GetCategoryById(categoryId);
-
-            await categoryService.DeleteCategory(categoryId);
-            Assert.IsNull(await categoryService.GetCategoryById(categoryId));
+            var category = new Category()
+            {
+                Name = "test category",
+                Description = "category for testing"
+            };
 
             await categoryService.CreateCategory(category);
+
+            var categories = await categoryService.GetAllCategories();
+
+            var categoryFromList = categories.FirstOrDefault(name => name.Name.Equals(category.Name));
+
+            await categoryService.DeleteCategory(categoryFromList.Id);
+            Assert.IsNull(await categoryService.GetCategoryById(categoryFromList.Id));
         }
 
         [TestMethod]
@@ -54,19 +60,37 @@ namespace Practice_Tests
 
             var categories = await categoryService.GetAllCategories();
 
+            var categoryFromList = categories.FirstOrDefault(name => name.Name.Equals("test category"));
+
             Assert.IsTrue(categories.FirstOrDefault(name => name.Name.Equals("test category")).Description.Equals(category.Description));
+
+            await categoryService.DeleteCategory(categoryFromList.Id);
         }
 
         [TestMethod]
         public async Task UpdateCategory()
         {
-            var category = await categoryService.GetCategoryById(new Guid("6dff5cc6-056f-46d0-a6b1-25471651cf2f"));
-            category.Name = "Fruits";
-            await categoryService.UpdateCategory(category);
-            var categoryUpdated = await categoryService.GetCategoryById(new Guid("6dff5cc6-056f-46d0-a6b1-25471651cf2f"));
+            var category = new Category()
+            {
+                Name = "test category",
+                Description = "category for testing"
+            };
+
+            await categoryService.CreateCategory(category);
+
+            var categories = await categoryService.GetAllCategories();
+
+            var categoryFromList = categories.FirstOrDefault(name => name.Name.Equals("test category"));
+
+            categoryFromList.Name = "Fruits";
+
+            await categoryService.UpdateCategory(categoryFromList);
+
+            var categoryUpdated = await categoryService.GetCategoryById(categoryFromList.Id);
+
             Assert.IsTrue(categoryUpdated.Name.Equals("Fruits"));
-            categoryUpdated.Name = "Computer Details";
-            await categoryService.UpdateCategory(categoryUpdated);
+
+            await categoryService.DeleteCategory(categoryFromList.Id);
         }
 
     }
