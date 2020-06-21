@@ -6,21 +6,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using System;
-using System.Web;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using System.IO;
 using System.ComponentModel.DataAnnotations;
-using Frontend.Services;
 using Frontend.Services.AzureStorageService;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Frontend.Pages.ItemPages
 {

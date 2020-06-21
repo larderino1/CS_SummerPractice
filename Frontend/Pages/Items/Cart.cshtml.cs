@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using DbManager.Models;
 using Frontend.Data.Models;
@@ -8,8 +9,8 @@ using Frontend.Services.CartService;
 using Frontend.Services.ItemService;
 using Frontend.Services.OrderService;
 using Frontend.Services.SessionService;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -29,12 +30,15 @@ namespace Frontend.Pages.Items
 
         private readonly UserManager<IdentityUser> manager;
 
-        public CartModel(IItemService service, ICartService cartService, IOrderService orderService, UserManager<IdentityUser> manager)
+        private readonly IEmailSender emailSender;
+
+        public CartModel(IItemService service, ICartService cartService, IOrderService orderService, UserManager<IdentityUser> manager, IEmailSender emailSender)
         {
             this.service = service;
             this.cartService = cartService;
             this.orderService = orderService;
             this.manager = manager;
+            this.emailSender = emailSender;
         }
 
         public void OnGet()
@@ -47,7 +51,7 @@ namespace Frontend.Pages.Items
         public async Task<IActionResult> OnGetBuy(Guid? id)
         {
             Cart = SessionHelper.GetObjectFromJson<List<Product>>(HttpContext.Session, "Cart");
-            if(Cart == null)
+            if (Cart == null)
             {
                 Cart = new List<Product>();
                 Cart.Add(new Product
@@ -55,12 +59,12 @@ namespace Frontend.Pages.Items
                     ProductItem = await service.GetItemById(id),
                     Quantity = 1
                 });
-                SessionHelper.SetObjectAsJson(HttpContext.Session, "Cart", Cart); 
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "Cart", Cart);
             }
             else
             {
                 int index = cartService.Exists(Cart, id);
-                if(index == -1)
+                if (index == -1)
                 {
                     Cart.Add(new Product
                     {
@@ -89,7 +93,7 @@ namespace Frontend.Pages.Items
         public IActionResult OnPostUpdate(int[] quantity)
         {
             Cart = SessionHelper.GetObjectFromJson<List<Product>>(HttpContext.Session, "Cart");
-            for(var i = 0; i < Cart.Count; i++)
+            for (var i = 0; i < Cart.Count; i++)
             {
                 Cart[i].Quantity = quantity[i];
             }
@@ -103,7 +107,7 @@ namespace Frontend.Pages.Items
 
             var user = await manager.FindByNameAsync(User.Identity.Name);
 
-            foreach(var cart in Cart)
+            foreach (var cart in Cart)
             {
                 var order = new Order
                 {
@@ -114,11 +118,23 @@ namespace Frontend.Pages.Items
                     SupplierId = cart.ProductItem.SupplierId
                 };
 
+                var sb = new StringBuilder();
                 await orderService.CreateOrder(order);
-            }
+                sb.AppendLine("<p>Hello!<br>");
+                sb.AppendLine("Thank you for choosing us.</p>");
+                sb.AppendLine("<p>Your order:</p>");
+                sb.AppendLine($"<p>{order.ItemName} - {cart.ProductItem.Price}₴<br>");
+                sb.AppendLine($"QTY: {order.Quantity}₴</p>");
+                sb.AppendLine($"<p>Total: {order.Price}</p>");
+                sb.AppendLine("<p>Best regards, your HeyTech team!</p>");
+                var body = sb.ToString();
+                const string subject = "Thank You For Your Purchase";
+                await emailSender.SendEmailAsync(user.Email, subject, body);
 
+            }
             Cart.Clear();
-            return RedirectToPage("./Pages/Index");
+            SessionHelper.SetObjectAsJson(HttpContext.Session,"Cart", Cart);
+            return RedirectToPage("./Items");
         }
     }
 }

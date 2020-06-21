@@ -8,6 +8,6 @@ namespace Frontend.Services.CartService
 {
     public interface ICartService
     {
-        public int Exists(List<Product> cart, Guid? id);
+        int Exists(List<Product> cart, Guid? id);
     }
 }

@@ -13,9 +13,13 @@ namespace DbManager.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         [Column("Name")]
+        [DataType(DataType.Text)]
         public string Name { get; set; }
         [Column("Description")]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+        [Required]
+        [DataType(DataType.Currency)]
         [Column("Price")]
         public double Price { get; set; }
         [Column("Image")]
@@ -37,7 +41,7 @@ namespace DbManager.Models
             CategoryId = categoryId;
         }
 
-        public ShopItem(string name, string description, double price, string image, Guid categoryId, string userId)
+        public ShopItem(string name, string description, double price, string image, Guid categoryId, string supplierId)
         {
             Id = Guid.NewGuid();
             Name = name;
@@ -45,7 +49,7 @@ namespace DbManager.Models
             Price = price;
             Image = image;
             CategoryId = categoryId;
-            SupplierId = userId;
+            SupplierId = supplierId;
         }
 
         public ShopItem() { }

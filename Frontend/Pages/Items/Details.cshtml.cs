@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Net.Http;
-using Newtonsoft.Json;
-using Microsoft.Extensions.Configuration;
 using DbManager.Models;
 using Frontend.Services.ItemService;
 using Frontend.Services.CategoryService;
-using Frontend.Services.AzureStorageService;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Frontend.Pages.ItemPages
 {

@@ -6,12 +6,18 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h2>Choose items to buy</h2>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
+<form>
+    <p style="margin-top: 20px;">
+        Search: <input type="text" asp-for="SearchString" />
+        <input class="btn btn-custom" type="submit" value="Search" />
+    </p>
+</form>
+<table class="table custom-table">
     <thead>
         <tr>
             <th>
@@ -29,36 +35,38 @@
             <th>
                 @Html.DisplayNameFor(model => model.ShopItem[0].Category)
             </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.ShopItem) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                <img class="img-thumbnail" src="@item.Image" width="100" height="100"/>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </td>
-            <td>
-                @if (User.IsInRole("Administrator") || (User.IsInRole("Supplier") && item.SupplierId.Equals(Model.LoggedUserId)))
-                {
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> 
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                }
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Cart" asp-page-handler="Buy" asp-route-id="@item.Id">Buy</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.ShopItem)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <img class="img-thumbnail" src="@item.Image" width="100" height="100" />
+                </td>
+                <td>
+                    <a href="@Url.Page("", new {CategoryId = item.Category.Id})">@Html.DisplayFor(modelItem => item.Category.Name)</a>
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrator") || (User.IsInRole("Supplier") && item.SupplierId.Equals(Model.LoggedUserId)))
+                    {
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Cart" asp-page-handler="Buy" asp-route-id="@item.Id">Buy</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

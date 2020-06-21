@@ -8,14 +8,14 @@ namespace Frontend.Services.CategoryService
 {
     public interface ICategoryService
     {
-        public Task<List<Category>> GetAllCategories();
+        Task<List<Category>> GetAllCategories();
 
-        public Task<Category> GetCategoryById(Guid? id);
+        Task<Category> GetCategoryById(Guid? id);
 
-        public Task CreateCategory(Category category);
+        Task CreateCategory(Category category);
 
-        public Task DeleteCategory(Guid? id);
+        Task DeleteCategory(Guid? id);
 
-        public Task UpdateCategory(Category category);
+        Task UpdateCategory(Category category);
     }
 }

@@ -14,9 +14,11 @@ namespace DbManager.Models
         [Column("Id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+        [DataType(DataType.Text)]
         [Column("Name")]
         public string Name { get; set; }
         [Column("Description")]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         public ICollection<ShopItem> CategoryItems { get; set; }

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
     <UserSecretsId>b180de16-b498-4301-8cd6-890d0bdb1130</UserSecretsId>
     <AssemblyName>Backend_Category</AssemblyName>
     <RootNamespace>Backend_Category</RootNamespace>
