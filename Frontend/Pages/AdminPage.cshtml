@@ -29,6 +29,7 @@
                         </td>
                         <td>
                             <a asp-page="./DeleteUser" asp-route-name="@user.UserName">Delete</a>
+                            <a asp-page="./ChangeUserRole" asp-route-name="@user.UserName" asp-route-role="@user.UserRole">Change role</a>
                         </td>
                     </tr>
                 }

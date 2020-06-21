@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DbManager.Migrations
 {
     [DbContext(typeof(AzureSqlDbContext))]
-    [Migration("20200507221624_FixMigrationAddUserBinding")]
-    partial class FixMigrationAddUserBinding
+    [Migration("20200614195824_AddOrdersEntity")]
+    partial class AddOrdersEntity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,25 @@ namespace DbManager.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("DbManager.Models.Order", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ItemName")
+                        .HasColumnName("Item")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("DbManager.Models.ShopItem", b =>

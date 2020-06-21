@@ -1,0 +1,24 @@
+﻿@page
+@model Frontend.Pages.ChangeUserRoleModel
+@{
+    ViewData["Title"] = "ChangeUserRole";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>ChangeUserRole</h1>
+<div>
+    <form method="get">
+        <h3><strong>Change role for user : @Model.User.UserName</strong></h3>
+    </form>
+</div>
+<form method="post">
+    <div class="form-group">
+        <select asp-for="Role.Id" class="form-control" asp-items="ViewBag.Roles"></select>
+    </div>
+    <div class="form-group">
+        <input type="hidden" asp-page-handler="OnPostAsync" asp-for="Role" />
+        <input type="submit" value="Save changes" class="btn btn-primary" />
+    </div>
+</form>
+
+

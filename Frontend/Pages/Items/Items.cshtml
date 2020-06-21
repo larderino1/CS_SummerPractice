@@ -58,7 +58,7 @@
                     <a href="@Url.Page("", new {CategoryId = item.Category.Id})">@Html.DisplayFor(modelItem => item.Category.Name)</a>
                 </td>
                 <td>
-                    @if (item.SupplierId.Equals(Model.LoggedUserId))
+                    @if (User.IsInRole("Administrator") || (User.IsInRole("Supplier") && item.SupplierId.Equals(Model.LoggedUserId)))
                     {
                         <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
                         <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
