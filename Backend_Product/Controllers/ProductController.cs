@@ -17,9 +17,9 @@ namespace Backend_Product.Controllers
     {
         private readonly IProductService _productService;
 
-        public ProductController(IConfiguration config)
+        public ProductController(IProductService _productService)
         {
-            _productService = new ProductService(config);
+            this._productService = _productService;
         }
 
         // GET: api/Product

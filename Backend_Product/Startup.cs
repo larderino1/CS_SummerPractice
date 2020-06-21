@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Azure;
 using Backend_Product.Services.ProductsService;
+using DbManager;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend_Product
 {
@@ -21,9 +23,14 @@ namespace Backend_Product
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public static void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddControllers();
+
+            services.AddDbContext<AzureSqlDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("SqlDbConnectionString")));
 
             services.AddScoped<IProductService, ProductService>();
 

@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Azure;
 using Backend_Category.Services.CategoryService;
+using DbManager;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend_Category
 {
@@ -28,6 +30,10 @@ namespace Backend_Category
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddDbContext<AzureSqlDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("SqlDbConnectionString")));
 
             services.AddScoped<ICategoryService, CategoryService>();
 

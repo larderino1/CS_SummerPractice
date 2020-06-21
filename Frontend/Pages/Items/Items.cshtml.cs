@@ -48,7 +48,7 @@ namespace Frontend.Pages.ItemPages
             }
             if (!string.IsNullOrEmpty(SearchString))
             {
-                ShopItem = await ShopItem.Where(s => s.Name.Contains(SearchString) || s.Description.Contains(SearchString) || s.Category.Name.Contains(SearchString)).AsQueryable().ToListAsync();
+                ShopItem = ShopItem.Where(s => s.Name.Contains(SearchString) || s.Description.Contains(SearchString) || s.Category.Name.Contains(SearchString)).AsQueryable().ToList();
             }
             LoggedUserId = new Guid(_userManager.GetUserId(User));
         }

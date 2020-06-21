@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Backend_Category.Services.CategoryService
 {
-    interface ICategoryService
+    public interface ICategoryService
     {
         Task<List<Category>> GetAll();
 

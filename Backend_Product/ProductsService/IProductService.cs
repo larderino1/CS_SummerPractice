@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Backend_Product.Services.ProductsService
 {
-    interface IProductService
+    public interface IProductService
     {
         Task<List<ShopItem>> GetAll();
 
