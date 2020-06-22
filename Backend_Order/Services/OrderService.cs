@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Backend_Order.Services
 {
+    //order service, which helps controlling order entity in db
     public class OrderService : IOrderService
     {
         private readonly AzureSqlDbContext context;

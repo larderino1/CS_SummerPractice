@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Frontend.Services.OrderService
 {
+    // service that handle requests to order api 
     public class OrderService : IOrderService
     {
         public async Task CreateOrder(Order order)

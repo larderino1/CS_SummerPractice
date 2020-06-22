@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Frontend.Services.AzureStorageService
 {
+    // service that helps working with Azure blob storage
     public class AzureStorageService : IAzureBlobStorage
     {
 

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Frontend.Services.CartService
 {
+    // service that helps control user cart
     public class CartService : ICartService
     {
         public int Exists(List<Product> cart, Guid? id)

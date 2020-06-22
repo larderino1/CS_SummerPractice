@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Frontend.Services.ItemService
 {
+    // service that handle requests to product api 
     public class ItemService : IItemService
     {
         public async Task CreateItem(ShopItem item)

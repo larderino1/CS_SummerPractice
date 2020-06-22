@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Backend_Product.Services.ProductsService
 {
+    //order service, which helps controlling product entity in db
     public class ProductService : IProductService
     {
         private readonly AzureSqlDbContext context;

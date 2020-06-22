@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Frontend.Services.CategoryService
 {
+    // service that handle requests to category api 
     public class CategoryService : ICategoryService
     {
         public async Task CreateCategory(Category category)

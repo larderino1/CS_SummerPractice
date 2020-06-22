@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Backend_Category.Controllers
 {
+    //in this controller describes actions, which you can made with category
     [Route("api/[controller]")]
     [ApiController]
     [Produces("application/json")]
