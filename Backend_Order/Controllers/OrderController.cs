@@ -9,11 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Backend_Order.Controllers
 {
+    //in this controller describes actions, which you can made with orders
     [Route("api/[controller]")]
     [ApiController]
+    [Produces("appication/json")]
     public class OrderController : ControllerBase
     {
-
+        //service to controll orders in db
         private readonly IOrderService orderService;
 
         public OrderController(IOrderService orderService)

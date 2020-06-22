@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Frontend.Services.UserService
 {
+    // service that handle requests to db to control users 
     public class UserService : IUserService
     {
 

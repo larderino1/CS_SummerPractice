@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Frontend.Services
 {
+    // this service helps working with email service SendGrid
     public class EmailSender : IEmailSender
     {
         private IConfiguration _config;

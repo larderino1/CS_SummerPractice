@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Backend_Category.Services.CategoryService
 {
+    //order service, which helps controlling category entity in db
     public class CategoryService : ICategoryService
     {
         private readonly AzureSqlDbContext context;
