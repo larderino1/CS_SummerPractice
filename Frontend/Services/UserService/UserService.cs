@@ -61,7 +61,7 @@ namespace Frontend.Services.UserService
             foreach(var user in users)
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
-                var rolesList = await userRoles.AsQueryable().ToListAsync();
+                var rolesList = userRoles.AsQueryable().ToList();
                 foreach (var role in rolesList)
                 {
                     if (!role.Equals("Administrator"))

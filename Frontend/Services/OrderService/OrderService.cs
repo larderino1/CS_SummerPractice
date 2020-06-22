@@ -17,7 +17,7 @@ namespace Frontend.Services.OrderService
             {
                 var request = new HttpRequestMessage()
                 {
-                    RequestUri = new Uri($"https://localhost:44329/api/order")
+                    RequestUri = new Uri($"https://backendorder.azurewebsites.net/api/order")
                 };
                 var orderJson = JsonConvert.SerializeObject(order);
                 await client.PostAsync(request.RequestUri, new StringContent(orderJson, Encoding.UTF8, "application/json"));
@@ -30,7 +30,7 @@ namespace Frontend.Services.OrderService
             {
                 var request = new HttpRequestMessage()
                 {
-                    RequestUri = new Uri($"https://localhost:44329/api/order/{id}")
+                    RequestUri = new Uri($"https://backendorder.azurewebsites.net/api/order/{id}")
                 };
                 await client.DeleteAsync(request.RequestUri);
             }
@@ -42,7 +42,7 @@ namespace Frontend.Services.OrderService
             {
                 var request = new HttpRequestMessage()
                 {
-                    RequestUri = new Uri($"https://localhost:44329/api/order/supplier/{id}")
+                    RequestUri = new Uri($"https://backendorder.azurewebsites.net/api/order/supplier/{id}")
                 };
                 var response = await client.GetAsync(request.RequestUri);
                 var jsonResult = await response.Content.ReadAsStringAsync();
@@ -57,7 +57,7 @@ namespace Frontend.Services.OrderService
             {
                 var request = new HttpRequestMessage()
                 {
-                    RequestUri = new Uri($"https://localhost:44329/api/order/{id}")
+                    RequestUri = new Uri($"https://backendorder.azurewebsites.net/api/order/{id}")
                 };
                 var response = await client.GetAsync(request.RequestUri);
                 var jsonResult = await response.Content.ReadAsStringAsync();
@@ -72,7 +72,7 @@ namespace Frontend.Services.OrderService
             {
                 var request = new HttpRequestMessage()
                 {
-                    RequestUri = new Uri($"https://localhost:44329/api/order/{order.Id}")
+                    RequestUri = new Uri($"https://backendorder.azurewebsites.net/api/order/{order.Id}")
                 };
                 var json = JsonConvert.SerializeObject(order);
                 await client.PutAsync(request.RequestUri, new StringContent(json, Encoding.UTF8, "application/json"));

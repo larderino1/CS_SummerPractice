@@ -25,21 +25,31 @@ namespace Practice_Tests
         [TestMethod]
         public async Task GetItemById()
         {
-            var itemId = new Guid("7f85aae0-a3ff-45b9-b8f9-6afac64ecd5a");
-            var item = await itemService.GetItemById(itemId);
-            Assert.IsTrue(item.Name.Equals("test item"));
+            var item = await itemService.GetItemById(new Guid("4e3db31c-3b94-4aa9-91f0-efabc2cf5adc"));
+            Assert.IsNotNull(item);
         }
 
         [TestMethod]
         public async Task DeleteItem()
         {
-            var itemId = new Guid("12bf8e8a-685a-4641-b22b-21e79a9e4270");
-            var item = await itemService.GetItemById(itemId);
-
-            await itemService.DeleteItemById(itemId);
-            Assert.IsNull(await itemService.GetItemById(itemId));
+            var item = new ShopItem()
+            {
+                Name = "testing item",
+                Description = "item for unit testing",
+                Price = 1,
+                Image = "C:/Users/oksan/Pictures/2014-04/IMG_8082.JPG",
+                CategoryId = new Guid("6dff5cc6-056f-46d0-a6b1-25471651cf2f"),
+                SupplierId = "d802685e-4a5e-465b-8df6-886b266cfe18"
+            };
 
             await itemService.CreateItem(item);
+
+            var items = await itemService.GetAllItems();
+
+            var itemFromList = items.FirstOrDefault(name => name.Name.Equals("testing item"));
+
+            await itemService.DeleteItemById(itemFromList.Id);
+            Assert.IsNull(await itemService.GetItemById(itemFromList.Id));
         }
 
         [TestMethod]
@@ -58,21 +68,37 @@ namespace Practice_Tests
             await itemService.CreateItem(item);
 
             var items = await itemService.GetAllItems();
-            Assert.IsTrue(items.FirstOrDefault(name => name.Name.Equals("test item")).Description.Equals(item.Description));
+            Assert.IsTrue(items.FirstOrDefault(name => name.Name.Equals("testing item")).Description.Equals(item.Description));
         }
 
         [TestMethod]
         public async Task UpdateItem()
         {
-            var itemId = new Guid("7f85aae0-a3ff-45b9-b8f9-6afac64ecd5a");
-            var item = await itemService.GetItemById(itemId);
+            var item = new ShopItem()
+            {
+                Name = "testing item",
+                Description = "item for unit testing",
+                Price = 1,
+                Image = "C:/Users/oksan/Pictures/2014-04/IMG_8082.JPG",
+                CategoryId = new Guid("6dff5cc6-056f-46d0-a6b1-25471651cf2f"),
+                SupplierId = "d802685e-4a5e-465b-8df6-886b266cfe18"
+            };
 
-            item.Name = "Apple";
-            await itemService.UpdateItem(item);
-            var updatedItem = await itemService.GetItemById(itemId);
+            await itemService.CreateItem(item);
+
+            var items = await itemService.GetAllItems();
+
+            var itemFromList = items.FirstOrDefault(name => name.Name.Equals("testing item"));
+
+            itemFromList.Name = "Apple";
+
+            await itemService.UpdateItem(itemFromList);
+
+            var updatedItem = await itemService.GetItemById(itemFromList.Id);
+
             Assert.IsTrue(updatedItem.Name.Equals("Apple"));
-            updatedItem.Name = "test item";
-            await itemService.UpdateItem(updatedItem);
+
+            await itemService.DeleteItemById(itemFromList.Id);
         }
     }
 }

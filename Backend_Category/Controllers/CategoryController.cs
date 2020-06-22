@@ -18,9 +18,9 @@ namespace Backend_Category.Controllers
 
         private readonly ICategoryService _categoryService;
 
-        public CategoryController(IConfiguration config)
+        public CategoryController(ICategoryService _categoryService)
         {
-            _categoryService = new CategoryService(config);
+            this._categoryService = _categoryService;
         }
 
         // GET: api/Category

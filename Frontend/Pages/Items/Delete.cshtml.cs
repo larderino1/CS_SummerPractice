@@ -47,7 +47,7 @@ namespace Frontend.Pages.ItemPages
             ShopItem = await service.GetItemById(id);
 
             var client = new BlobClient(new Uri(ShopItem.Image));
-            await client.DeleteIfExistsAsync();
+            //await client.DeleteAsync();
 
             if (ShopItem != null)
             {
