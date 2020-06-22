@@ -44,11 +44,11 @@ namespace Frontend.Pages.ItemPages
             }
             if (!string.IsNullOrEmpty(CategoryId))
             {
-                ShopItem = await ShopItem.Where(s => s.CategoryId.ToString() == CategoryId).AsQueryable().ToListAsync();
+                ShopItem = ShopItem.Where(s => s.CategoryId.ToString() == CategoryId).ToList();
             }
             if (!string.IsNullOrEmpty(SearchString))
             {
-                ShopItem = ShopItem.Where(s => s.Name.Contains(SearchString) || s.Description.Contains(SearchString) || s.Category.Name.Contains(SearchString)).AsQueryable().ToList();
+                ShopItem = ShopItem.Where(s => s.Name.Contains(SearchString) || s.Description.Contains(SearchString) || s.Category.Name.Contains(SearchString)).ToList();
             }
             LoggedUserId = new Guid(_userManager.GetUserId(User));
         }

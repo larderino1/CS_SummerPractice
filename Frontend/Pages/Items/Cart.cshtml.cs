@@ -125,7 +125,7 @@ namespace Frontend.Pages.Items
                 sb.AppendLine("<p>Your order:</p>");
                 sb.AppendLine($"<p>{order.ItemName} - {cart.ProductItem.Price}₴<br>");
                 sb.AppendLine($"QTY: {order.Quantity}</p>");
-                sb.AppendLine($"<p>Total: {order.Price}</p>");
+                sb.AppendLine($"<p>Total: {order.Price} ₴</p>");
                 sb.AppendLine("<p>Best regards, your HeyTech team!</p>");
                 var body = sb.ToString();
                 const string subject = "Thank You For Your Purchase";

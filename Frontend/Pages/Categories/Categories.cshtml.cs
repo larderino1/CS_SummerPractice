@@ -28,7 +28,7 @@ namespace Frontend.Pages.Categories
             Category = await service.GetAllCategories();
             if (!string.IsNullOrEmpty(SearchString))
             {
-                Category = Category.Where(s => s.Name.Contains(SearchString) || s.Description.Contains(SearchString)).AsQueryable().ToList();
+                Category = Category.Where(s => s.Name.Contains(SearchString) || s.Description.Contains(SearchString)).ToList();
             }
         }
     }
