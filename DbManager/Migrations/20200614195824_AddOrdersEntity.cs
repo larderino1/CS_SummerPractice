@@ -13,7 +13,7 @@ namespace DbManager.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Item = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(maxLength: 450, nullable: false)
+                    UserId = table.Column<string>(maxLength: 128, nullable: false)
                 },
                 constraints: table =>
                 {
